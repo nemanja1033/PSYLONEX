@@ -672,7 +672,7 @@ button {
 
 .agency-visual {
   position: relative;
-  min-height: 560px;
+  min-height: 620px;
   border-radius: 32px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: linear-gradient(160deg, rgba(18, 22, 20, 0.9), rgba(9, 11, 10, 0.85));
@@ -680,6 +680,7 @@ button {
   padding: 36px;
   box-shadow: var(--shadow);
   box-sizing: border-box;
+  perspective: 1200px;
 }
 
 .agency-rings {
@@ -744,6 +745,45 @@ button {
   backdrop-filter: blur(8px);
 }
 
+.agency-orbits {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.agency-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  animation: orbit-rotate var(--duration) linear infinite;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.agency-orbit-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(58, 214, 196, 0.7);
+  box-shadow: 0 0 12px rgba(58, 214, 196, 0.5);
+  transform: translateX(var(--radius));
+}
+
+.agency-orbit-node {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotate(var(--angle)) translateX(var(--radius)) rotate(calc(-1 * var(--angle)));
+  transform-origin: center;
+  pointer-events: auto;
+}
+
 .agency-core-eyebrow {
   font-family: var(--font-mono), "SFMono-Regular", monospace;
   font-size: 0.7rem;
@@ -763,25 +803,17 @@ button {
 }
 
 .agency-node {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: var(--x);
-  margin-top: var(--y);
-  transform: translate(-50%, -50%) translateY(0);
-  width: min(240px, 42vw);
+  position: relative;
+  width: clamp(190px, 22vw, 230px);
   padding: 18px 20px;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(12, 15, 14, 0.92);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
   z-index: 2;
-  animation: float-node 14s ease-in-out infinite;
+  animation: orbit-counter var(--duration) linear infinite;
   backdrop-filter: blur(10px);
-}
-
-.agency-node:nth-of-type(3n) {
-  animation-duration: 18s;
+  transform-style: preserve-3d;
 }
 
 .agency-node-tag {
@@ -823,6 +855,57 @@ button {
   bottom: 16%;
   animation-delay: 1.2s;
   border-color: rgba(255, 138, 76, 0.5);
+}
+
+.agency-beam {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  filter: blur(18px);
+  opacity: 0.6;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+
+.agency-beam--a {
+  left: 12%;
+  top: 12%;
+  background: radial-gradient(circle, rgba(255, 138, 76, 0.45), transparent 70%);
+  animation: beam-shift 14s ease-in-out infinite;
+}
+
+.agency-beam--b {
+  right: 10%;
+  bottom: 12%;
+  background: radial-gradient(circle, rgba(58, 214, 196, 0.45), transparent 70%);
+  animation: beam-shift 16s ease-in-out infinite reverse;
+}
+
+.agency-signal {
+  position: absolute;
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  opacity: 0.35;
+  z-index: 1;
+  animation: pulse-ring 8s ease-in-out infinite;
+}
+
+.agency-signal--a {
+  width: 420px;
+  height: 420px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.agency-signal--b {
+  width: 320px;
+  height: 320px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 2s;
 }
 
 .agency-summary {
@@ -1607,7 +1690,7 @@ button {
   }
 
   .agency-visual {
-    min-height: 520px;
+    min-height: 560px;
   }
 }
 
@@ -1654,12 +1737,34 @@ button {
     gap: 12px;
   }
 
-  .agency-node {
+  .agency-orbits {
+    position: relative;
+    inset: auto;
+    display: grid;
+    gap: 14px;
+    pointer-events: auto;
+  }
+
+  .agency-orbit {
     position: relative;
     left: auto;
     top: auto;
-    margin: 14px 0 0;
+    width: 100%;
+    height: auto;
+    animation: none;
+  }
+
+  .agency-orbit-dot {
+    display: none;
+  }
+
+  .agency-orbit-node {
+    position: relative;
     transform: none;
+    margin-top: 12px;
+  }
+
+  .agency-node {
     width: 100%;
     animation: none;
   }
@@ -1679,6 +1784,10 @@ button {
 
   .agency-rings {
     opacity: 0.35;
+  }
+
+  .agency-signal {
+    display: none;
   }
 }
 
@@ -1723,6 +1832,24 @@ button {
   }
 }
 
+@keyframes orbit-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-counter {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
 @keyframes float-node {
   0%,
   100% {
@@ -1752,5 +1879,15 @@ button {
   50% {
     transform: scale(1.05);
     opacity: 0.7;
+  }
+}
+
+@keyframes beam-shift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(10px, -12px) scale(1.05);
   }
 }

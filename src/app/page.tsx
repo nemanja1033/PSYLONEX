@@ -71,48 +71,54 @@ const heroStats = [
   { label: "Operational impact", value: "Less friction, more signal" }
 ];
 
+const agencyOrbits = [
+  { radius: 260, duration: 48 },
+  { radius: 190, duration: 34 },
+  { radius: 130, duration: 24 }
+];
+
 const agencyNodes = [
   {
     title: "Discovery",
     body: "Operational mapping, stakeholder interviews, signal capture.",
     tag: "Signal audit",
-    x: "-32%",
-    y: "-18%"
+    orbit: 0,
+    angle: 320
   },
   {
     title: "Systems design",
     body: "Architecture, integration plans, governance models.",
     tag: "Blueprint",
-    x: "30%",
-    y: "-20%"
+    orbit: 0,
+    angle: 140
   },
   {
     title: "Experience design",
     body: "Interfaces and workflows crafted for daily use.",
     tag: "UX + UI",
-    x: "34%",
-    y: "12%"
+    orbit: 1,
+    angle: 30
   },
   {
     title: "Engineering",
     body: "Platforms, automations, data pipelines, reliable delivery.",
     tag: "Build",
-    x: "-34%",
-    y: "16%"
+    orbit: 1,
+    angle: 210
   },
   {
     title: "Enablement",
     body: "Documentation, training, playbooks for adoption.",
     tag: "Enable",
-    x: "-6%",
-    y: "36%"
+    orbit: 2,
+    angle: 100
   },
   {
     title: "Decision intelligence",
     body: "Dashboards, alerts, and feedback loops.",
     tag: "Operate",
-    x: "22%",
-    y: "34%"
+    orbit: 2,
+    angle: 260
   }
 ];
 
@@ -327,6 +333,10 @@ export default function Home() {
                   d="M560 330c-70 140-170 200-240 210"
                 />
               </svg>
+              <div className="agency-beam agency-beam--a" />
+              <div className="agency-beam agency-beam--b" />
+              <div className="agency-signal agency-signal--a" />
+              <div className="agency-signal agency-signal--b" />
               <div className="agency-core">
                 <span className="agency-core-eyebrow">Operational spine</span>
                 <h3>Clarity system</h3>
@@ -335,19 +345,37 @@ export default function Home() {
                   record that keeps operations calm under pressure.
                 </p>
               </div>
-              {agencyNodes.map((node) => (
-                <div
-                  key={node.title}
-                  className="agency-node"
-                  style={
-                    { "--x": node.x, "--y": node.y } as CSSProperties
-                  }
-                >
-                  <div className="agency-node-tag">{node.tag}</div>
-                  <h4>{node.title}</h4>
-                  <p>{node.body}</p>
-                </div>
-              ))}
+              <div className="agency-orbits">
+                {agencyOrbits.map((orbit, orbitIndex) => (
+                  <div
+                    key={orbit.radius}
+                    className="agency-orbit"
+                    style={
+                      {
+                        "--radius": `${orbit.radius}px`,
+                        "--duration": `${orbit.duration}s`
+                      } as CSSProperties
+                    }
+                  >
+                    <div className="agency-orbit-dot" />
+                    {agencyNodes
+                      .filter((node) => node.orbit === orbitIndex)
+                      .map((node) => (
+                        <div
+                          key={node.title}
+                          className="agency-orbit-node"
+                          style={{ "--angle": `${node.angle}deg` } as CSSProperties}
+                        >
+                          <div className="agency-node">
+                            <div className="agency-node-tag">{node.tag}</div>
+                            <h4>{node.title}</h4>
+                            <p>{node.body}</p>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                ))}
+              </div>
               <div className="agency-pulse agency-pulse--one" />
               <div className="agency-pulse agency-pulse--two" />
             </div>
