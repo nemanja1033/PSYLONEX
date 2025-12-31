@@ -76,43 +76,43 @@ const agencyNodes = [
     title: "Discovery",
     body: "Operational mapping, stakeholder interviews, signal capture.",
     tag: "Signal audit",
-    x: "-42%",
-    y: "-22%"
+    x: "-32%",
+    y: "-18%"
   },
   {
     title: "Systems design",
     body: "Architecture, integration plans, governance models.",
     tag: "Blueprint",
-    x: "38%",
-    y: "-26%"
+    x: "30%",
+    y: "-20%"
   },
   {
     title: "Experience design",
     body: "Interfaces and workflows crafted for daily use.",
     tag: "UX + UI",
-    x: "52%",
-    y: "14%"
+    x: "34%",
+    y: "12%"
   },
   {
     title: "Engineering",
     body: "Platforms, automations, data pipelines, reliable delivery.",
     tag: "Build",
-    x: "-48%",
-    y: "18%"
+    x: "-34%",
+    y: "16%"
   },
   {
     title: "Enablement",
     body: "Documentation, training, playbooks for adoption.",
     tag: "Enable",
-    x: "-8%",
-    y: "48%"
+    x: "-6%",
+    y: "36%"
   },
   {
     title: "Decision intelligence",
     body: "Dashboards, alerts, and feedback loops.",
     tag: "Operate",
-    x: "28%",
-    y: "44%"
+    x: "22%",
+    y: "34%"
   }
 ];
 
