@@ -28,7 +28,7 @@ export default function PrincipleAccordion({ items }: PrincipleAccordionProps) {
             initial={false}
             animate={{
               borderColor: isActive
-                ? "rgba(107, 114, 255, 0.4)"
+                ? "rgba(255, 138, 76, 0.4)"
                 : "rgba(255, 255, 255, 0.08)"
             }}
             transition={{ duration: 0.3, ease }}

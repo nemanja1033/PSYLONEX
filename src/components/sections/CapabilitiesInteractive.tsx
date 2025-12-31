@@ -30,7 +30,7 @@ export default function CapabilitiesInteractive({ items }: CapabilitiesInteracti
             initial={false}
             animate={{
               borderColor: isActive
-                ? "rgba(107, 114, 255, 0.45)"
+                ? "rgba(255, 138, 76, 0.45)"
                 : "rgba(255, 255, 255, 0.12)",
               boxShadow: isActive
                 ? "0 20px 50px rgba(0, 0, 0, 0.45)"

@@ -160,7 +160,7 @@ function NetworkBackground({
             ctx.globalAlpha = opacity * (alpha + boost);
             ctx.strokeStyle =
               boost > 0.2
-                ? "rgba(107, 114, 255, 0.5)"
+                ? "rgba(58, 214, 196, 0.5)"
                 : "rgba(245, 243, 239, 0.18)";
             ctx.beginPath();
             ctx.moveTo(node.x, node.y + scrollOffset * node.depth);
@@ -194,7 +194,7 @@ function NetworkBackground({
           const x = pulse.from.x + (pulse.to.x - pulse.from.x) * pulse.progress;
           const y = pulse.from.y + (pulse.to.y - pulse.from.y) * pulse.progress;
           ctx.globalAlpha = 0.6;
-          ctx.fillStyle = "rgba(107, 114, 255, 0.8)";
+          ctx.fillStyle = "rgba(255, 138, 76, 0.8)";
           ctx.beginPath();
           ctx.arc(x, y + scrollOffset * 0.4, 2.2, 0, Math.PI * 2);
           ctx.fill();
